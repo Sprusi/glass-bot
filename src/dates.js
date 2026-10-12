@@ -1,37 +1,38 @@
-// Чистые функции для дат: ничего не знают ни про Telegram, ни про базу.
-// В базе дата хранится строкой "YYYY-MM-DD", пользователю показываем "ДД.ММ.ГГГГ".
+const DEFAULT_TIMEZONE = "Europe/Moscow";
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
-export const DEFAULT_TIMEZONE = "Europe/Moscow";
+export const getToday = (timezone = DEFAULT_TIMEZONE) =>
+  new Intl.DateTimeFormat("en-CA", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
 
-/** Сегодняшняя дата в часовом поясе пользователя → "YYYY-MM-DD" */
-export function getToday(timezone = DEFAULT_TIMEZONE) {
-  // TODO: реализовать
-  return null;
-}
+export const addDays = (date, countDays) => {
+  const result = new Date(date + "T00:00:00Z");
+  result.setUTCDate(result.getUTCDate() + countDays);
+  return result.toISOString().slice(0, 10);
+};
 
-/** Дата + N дней → "YYYY-MM-DD" (N может быть отрицательным: -1 = вчера) */
-export function addDays(date, days) {
-  // TODO: реализовать
-  return null;
-}
+export const daysBetween = (from, to) =>
+  Math.round((Date.parse(to) - Date.parse(from)) / MS_PER_DAY);
 
-/**
- * Разбор даты от пользователя: "01.10.2026" или "01/10/2026" → "2026-10-01".
- * Неверный формат или несуществующая дата (31.02) → null
- */
-export function parseUserDate(text) {
-  // TODO: реализовать
-  return null;
-}
+export const parseUserDate = (text) => {
+  if (typeof text !== "string") return null;
 
-/** "2026-10-01" → "01.10.2026" */
-export function formatForUser(date) {
-  // TODO: реализовать
-  return date;
-}
+  const match = text.trim().match(/^(\d{2})[./](\d{2})[./](\d{4})$/);
+  if (!match) return null;
 
-/** Дата позже сегодняшней в часовом поясе пользователя? */
-export function isFuture(date, timezone = DEFAULT_TIMEZONE) {
-  // TODO: реализовать
-  return false;
-}
+  const [, day, month, year] = match;
+  const date = `${year}-${month}-${day}`;
+
+  if (Number.isNaN(Date.parse(date))) return null;
+
+  return addDays(date, 0) === date ? date : null;
+};
+
+export const formatForUser = (date) => date.split("-").reverse().join(".");
+
+export const isFuture = (date, timezone = DEFAULT_TIMEZONE) =>
+  date > getToday(timezone);

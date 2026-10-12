@@ -1,5 +1,4 @@
-// Все тексты бота
-
+// /start - Приветствие
 export const START_TEXT = `Привет! 👋 Я напоминаю, когда пора менять контактные линзы.
 
 Как это работает:
@@ -16,8 +15,10 @@ export const START_TEXT = `Привет! 👋 Я напоминаю, когда 
 // /new, шаг 1 — дата начала
 export const ASK_START_DATE_TEXT = "Когда начал(а) носить эту пару?";
 export const ASK_START_DATE_INPUT_TEXT = "Напиши дату в формате ДД.ММ.ГГГГ";
-export const INVALID_DATE_TEXT = "Не получилось разобрать дату, пример: 01.10.2026";
-export const FUTURE_DATE_TEXT = "Дата начала не может быть в будущем. Напиши сегодняшнюю или более раннюю дату";
+export const INVALID_DATE_TEXT =
+  "Не получилось разобрать дату, пример: 01.10.2026";
+export const FUTURE_DATE_TEXT =
+  "Дата начала не может быть в будущем. Напиши сегодняшнюю или более раннюю дату";
 
 // /new, шаг 2 — срок
 export const ASK_TERM_TEXT = "Какой у линз срок замены?";

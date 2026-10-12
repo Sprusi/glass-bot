@@ -1,4 +1,3 @@
-// Точка входа: создать бота, подключить обработчики, запустить
 import { Bot } from "node-telegram-bot-api";
 import { run } from "node-telegram-bot-api/node";
 import { registerHandlers } from "./bot.js";
