@@ -1,0 +1,33 @@
+# Зависимости
+node_modules/
+
+# Переменные окружения (токен бота и прочие секреты)
+.env
+.env.*
+!.env.template
+
+# База данных SQLite (данные пользователей)
+*.db
+*.db-journal
+
+# Логи
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Сборка / кэш
+dist/
+build/
+coverage/
+.cache/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp

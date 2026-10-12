@@ -1,0 +1,20 @@
+{
+  "name": "glass-bot",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --exec \"node --env-file=.env\" src/index.js",
+    "start": "node --env-file=.env src/index.js"
+  },
+  "keywords": [],
+  "author": "Brovko Danila",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "node-telegram-bot-api": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
