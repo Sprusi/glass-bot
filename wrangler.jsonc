@@ -1,0 +1,11 @@
+{
+  "name": "glass-bot",
+  "compatibility_date": "2026-10-01",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "glass-bot",
+      "database_id": "local",
+    },
+  ],
+}

@@ -4,8 +4,13 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec \"node --env-file=.env\" src/index.js",
-    "start": "node --env-file=.env src/index.js"
+    "dev": "nodemon --watch src --exec \"node --env-file=.env\" src/index.js",
+    "start": "node --env-file=.env src/index.js",
+    "db:migrate": "wrangler d1 migrations apply glass-bot --local",
+    "db:query": "wrangler d1 execute glass-bot --local --command"
+  },
+  "engines": {
+    "node": ">=22"
   },
   "keywords": [],
   "author": "Brovko Danila",
@@ -15,6 +20,7 @@
     "node-telegram-bot-api": "^2.1.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "wrangler": "^4.150.0"
   }
 }

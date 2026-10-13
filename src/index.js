@@ -1,6 +1,8 @@
 import { Bot } from "node-telegram-bot-api";
 import { run } from "node-telegram-bot-api/node";
+import { getPlatformProxy } from "wrangler";
 import { registerHandlers } from "./bot.js";
+import { initDb } from "./db.js";
 
 const token = process.env.BOT_TOKEN;
 
@@ -9,11 +11,18 @@ if (!token) {
   process.exit(1);
 }
 
+const { env, dispose } = await getPlatformProxy();
+initDb(env.DB);
+
 const bot = new Bot(token);
 
 registerHandlers(bot);
 
-run(bot).catch((err) => {
+try {
+  await run(bot);
+} catch (err) {
   console.error("bot crashed", err);
-  process.exit(1);
-});
+  process.exitCode = 1;
+} finally {
+  await dispose();
+}

@@ -7,7 +7,7 @@ import {
   parseUserDate,
 } from "../dates.js";
 import { startDateKeyboard, termKeyboard } from "../keyboards.js";
-import { clearSession, setSession, STEP } from "../session.js";
+import { clearSession, createCycle, setSession, STEP } from "../db.js";
 import {
   ASK_START_DATE_INPUT_TEXT,
   ASK_START_DATE_TEXT,
@@ -74,6 +74,7 @@ const handleTermText = async (ctx, text, session) => {
 
 const finish = async (ctx, startDate, termDays) => {
   const replaceDate = addDays(startDate, termDays);
+  await createCycle(ctx.from.id, startDate, termDays);
   await clearSession(ctx.from.id);
   await ctx.reply(
     doneText(formatForUser(startDate), termDays, formatForUser(replaceDate)),

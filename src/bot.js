@@ -4,7 +4,7 @@ import {
   startNewDialog,
 } from "./handlers/new.js";
 import { handleStart } from "./handlers/start.js";
-import { getSession } from "./session.js";
+import { getSession, STEP } from "./db.js";
 import { NO_DIALOG_TEXT } from "./texts.js";
 import { removeKeyboard } from "./utils/telegram.js";
 
